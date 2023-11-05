@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  symfony:
+    container_name: truss_symfony
+    build:
+      dockerfile: ./docker/symfony/Dockerfile
+    image: truss_symfony
+    volumes:
+      - ./truss_server:/root/server
+    ports:
+      - 80:80
+    env_file:
+      - ./docker/symfony/.env
+    depends_on:
+      - mariadb
+
+  mariadb:
+    container_name: truss_mariadb
+    build:
+      dockerfile: ./docker/mariadb/Dockerfile
+    image: truss_mariadb
+    ports:
+      - 3306:3306
+    env_file:
+      - ./docker/mariadb/.env
+
+  node:
+    container_name: truss_node
+    build:
+      dockerfile: ./docker/node/Dockerfile
+    image: truss_node
+    volumes:
+      - ./truss_client:/root/client
+    ports:
+      - 4200:4200
+      - 49153:49153
+    depends_on:
+      - symfony
