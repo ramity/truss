@@ -20,7 +20,7 @@ class DevData extends Fixture
     {
         // Create an Account and Server
 
-        $username = "db2";
+        $username = "test";
         $password = "dpV~9O&r^gY,|[w's<;f}:>+-G'GM-s1gqe/S8Xy[f<6wI^iF*M-AE2^]@~|~6>";
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
