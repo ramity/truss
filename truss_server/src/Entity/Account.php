@@ -6,6 +6,7 @@ use App\Repository\AccountRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account
@@ -19,7 +20,7 @@ class Account
     private ?string $username = null;
 
     #[ORM\Column(length: 1024)]
-    private ?string $password = null;
+    private ?string $passwordHash = null;
 
     #[ORM\ManyToMany(targetEntity: Server::class, mappedBy: 'members')]
     private Collection $servers;
@@ -30,11 +31,19 @@ class Account
     #[ORM\ManyToMany(targetEntity: LoginAttempt::class, mappedBy: 'account')]
     private Collection $loginAttempts;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
+
     public function __construct()
     {
         $this->servers = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->loginAttempts = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -54,14 +63,14 @@ class Account
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getPasswordHash(): ?string
     {
-        return $this->password;
+        return $this->passwordHash;
     }
 
-    public function setPassword(string $password): static
+    public function setPasswordHash(string $passwordHash): static
     {
-        $this->password = $password;
+        $this->passwordHash = $passwordHash;
 
         return $this;
     }
@@ -143,6 +152,30 @@ class Account
         if ($this->loginAttempts->removeElement($loginAttempt)) {
             $loginAttempt->removeAccount($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

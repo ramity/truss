@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
@@ -22,13 +23,21 @@ class Post
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $text = null;
 
-    #[ORM\ManyToMany(targetEntity: Channel::class, mappedBy: 'posts')]
-    private Collection $channels;
+    #[ORM\ManyToMany(targetEntity: TextChannel::class, mappedBy: 'posts')]
+    private Collection $textChannels;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
         $this->author = new ArrayCollection();
-        $this->channels = new ArrayCollection();
+        $this->textChannels = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -73,28 +82,52 @@ class Post
     }
 
     /**
-     * @return Collection<int, Channel>
+     * @return Collection<int, TextChannel>
      */
-    public function getChannels(): Collection
+    public function getTextChannels(): Collection
     {
-        return $this->channels;
+        return $this->textChannels;
     }
 
-    public function addChannel(Channel $channel): static
+    public function addTextChannel(TextChannel $textChannel): static
     {
-        if (!$this->channels->contains($channel)) {
-            $this->channels->add($channel);
-            $channel->addPost($this);
+        if (!$this->textChannels->contains($textChannel)) {
+            $this->textChannels->add($textChannel);
+            $textChannel->addPost($this);
         }
 
         return $this;
     }
 
-    public function removeChannel(Channel $channel): static
+    public function removeTextChannel(TextChannel $textChannel): static
     {
-        if ($this->channels->removeElement($channel)) {
-            $channel->removePost($this);
+        if ($this->textChannels->removeElement($textChannel)) {
+            $textChannel->removePost($this);
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

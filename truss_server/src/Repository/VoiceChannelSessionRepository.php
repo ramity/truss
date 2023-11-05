@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\VoiceChannelConnection;
+use App\Entity\VoiceChannelSession;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<VoiceChannelConnection>
+ * @extends ServiceEntityRepository<VoiceChannelSession>
  *
- * @method VoiceChannelConnection|null find($id, $lockMode = null, $lockVersion = null)
- * @method VoiceChannelConnection|null findOneBy(array $criteria, array $orderBy = null)
- * @method VoiceChannelConnection[]    findAll()
- * @method VoiceChannelConnection[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method VoiceChannelSession|null find($id, $lockMode = null, $lockVersion = null)
+ * @method VoiceChannelSession|null findOneBy(array $criteria, array $orderBy = null)
+ * @method VoiceChannelSession[]    findAll()
+ * @method VoiceChannelSession[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VoiceChannelConnectionRepository extends ServiceEntityRepository
+class VoiceChannelSessionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, VoiceChannelConnection::class);
+        parent::__construct($registry, VoiceChannelSession::class);
     }
 
 //    /**
-//     * @return VoiceChannelConnection[] Returns an array of VoiceChannelConnection objects
+//     * @return VoiceChannelSession[] Returns an array of VoiceChannelSession objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class VoiceChannelConnectionRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?VoiceChannelConnection
+//    public function findOneBySomeField($value): ?VoiceChannelSession
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')
