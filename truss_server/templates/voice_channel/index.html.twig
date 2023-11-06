@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VoiceChannel index{% endblock %}
+
+{% block body %}
+    <h1>VoiceChannel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voice_channel in voice_channels %}
+            <tr>
+                <td>{{ voice_channel.id }}</td>
+                <td>{{ voice_channel.name }}</td>
+                <td>{{ voice_channel.createdAt ? voice_channel.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ voice_channel.updatedAt ? voice_channel.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_voice_channel_show', {'id': voice_channel.id}) }}">show</a>
+                    <a href="{{ path('app_voice_channel_edit', {'id': voice_channel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voice_channel_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LoginAttempt{% endblock %}
+
+{% block body %}
+    <h1>Create new LoginAttempt</h1>
+
+    {{ include('login_attempt/_form.html.twig') }}
+
+    <a href="{{ path('app_login_attempt_index') }}">back to list</a>
+{% endblock %}

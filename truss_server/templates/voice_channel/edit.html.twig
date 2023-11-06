@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit VoiceChannel{% endblock %}
+
+{% block body %}
+    <h1>Edit VoiceChannel</h1>
+
+    {{ include('voice_channel/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_voice_channel_index') }}">back to list</a>
+
+    {{ include('voice_channel/_delete_form.html.twig') }}
+{% endblock %}

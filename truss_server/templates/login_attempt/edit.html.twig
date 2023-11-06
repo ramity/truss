@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit LoginAttempt{% endblock %}
+
+{% block body %}
+    <h1>Edit LoginAttempt</h1>
+
+    {{ include('login_attempt/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_login_attempt_index') }}">back to list</a>
+
+    {{ include('login_attempt/_delete_form.html.twig') }}
+{% endblock %}

@@ -16,7 +16,7 @@ class Account
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 1024)]
@@ -44,6 +44,11 @@ class Account
         $this->loginAttempts = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return "{$this->username}";
     }
 
     public function getId(): ?int

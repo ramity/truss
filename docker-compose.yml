@@ -9,7 +9,7 @@ services:
     volumes:
       - ./truss_server:/root/server
     ports:
-      - 80:80
+      - 8000:8000
     env_file:
       - ./docker/symfony/.env
     depends_on:

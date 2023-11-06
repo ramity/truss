@@ -1,12 +1,16 @@
 FROM php:8.2-bookworm
 
-WORKDIR /root/server
-
 # Update
 RUN apt update
 RUN apt upgrade -y
 RUN apt install -y zip
+RUN apt install -y apt-utils
 RUN docker-php-ext-configure pdo_mysql && docker-php-ext-install pdo_mysql
+
+# Install symfony binary
+RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
+RUN apt install -y symfony-cli
+RUN symfony server:ca:install
 
 # Install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -15,4 +19,7 @@ RUN php composer-setup.php
 RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
-ENTRYPOINT sleep infinity
+WORKDIR /root/server
+
+# ENTRYPOINT sleep infinity
+ENTRYPOINT symfony server:start

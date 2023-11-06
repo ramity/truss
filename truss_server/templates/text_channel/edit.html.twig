@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TextChannel{% endblock %}
+
+{% block body %}
+    <h1>Edit TextChannel</h1>
+
+    {{ include('text_channel/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_text_channel_index') }}">back to list</a>
+
+    {{ include('text_channel/_delete_form.html.twig') }}
+{% endblock %}

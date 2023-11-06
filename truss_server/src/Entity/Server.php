@@ -22,7 +22,7 @@ class Server
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: TextChannel::class, mappedBy: 'server')]
+    #[ORM\ManyToMany(targetEntity: TextChannel::class, mappedBy: 'servers')]
     private Collection $textChannels;
 
     #[ORM\OneToMany(mappedBy: 'server', targetEntity: Category::class)]
@@ -45,6 +45,11 @@ class Server
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
         $this->voiceChannels = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return "{$this->name} @ {$this->createdAt->format('r')}";
     }
 
     public function getId(): ?int

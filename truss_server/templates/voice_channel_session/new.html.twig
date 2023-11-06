@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New VoiceChannelSession{% endblock %}
+
+{% block body %}
+    <h1>Create new VoiceChannelSession</h1>
+
+    {{ include('voice_channel_session/_form.html.twig') }}
+
+    <a href="{{ path('app_voice_channel_session_index') }}">back to list</a>
+{% endblock %}

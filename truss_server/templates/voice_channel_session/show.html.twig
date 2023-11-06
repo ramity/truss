@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VoiceChannelSession{% endblock %}
+
+{% block body %}
+    <h1>VoiceChannelSession</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ voice_channel_session.id }}</td>
+            </tr>
+            <tr>
+                <th>Peers</th>
+                <td>{{ voice_channel_session.peers ? voice_channel_session.peers|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ voice_channel_session.active ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Messages</th>
+                <td>{{ voice_channel_session.messages ? voice_channel_session.messages|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ voice_channel_session.createdAt ? voice_channel_session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ voice_channel_session.updatedAt ? voice_channel_session.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voice_channel_session_index') }}">back to list</a>
+
+    <a href="{{ path('app_voice_channel_session_edit', {'id': voice_channel_session.id}) }}">edit</a>
+
+    {{ include('voice_channel_session/_delete_form.html.twig') }}
+{% endblock %}

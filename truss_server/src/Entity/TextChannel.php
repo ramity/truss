@@ -43,6 +43,11 @@ class TextChannel
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    public function __toString()
+    {
+        return "{$this->name} @ {$this->createdAt->format('r')}";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

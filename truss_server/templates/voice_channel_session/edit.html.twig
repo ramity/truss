@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit VoiceChannelSession{% endblock %}
+
+{% block body %}
+    <h1>Edit VoiceChannelSession</h1>
+
+    {{ include('voice_channel_session/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_voice_channel_session_index') }}">back to list</a>
+
+    {{ include('voice_channel_session/_delete_form.html.twig') }}
+{% endblock %}

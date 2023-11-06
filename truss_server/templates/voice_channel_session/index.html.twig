@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VoiceChannelSession index{% endblock %}
+
+{% block body %}
+    <h1>VoiceChannelSession index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Peers</th>
+                <th>Active</th>
+                <th>Messages</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voice_channel_session in voice_channel_sessions %}
+            <tr>
+                <td>{{ voice_channel_session.id }}</td>
+                <td>{{ voice_channel_session.peers ? voice_channel_session.peers|json_encode : '' }}</td>
+                <td>{{ voice_channel_session.active ? 'Yes' : 'No' }}</td>
+                <td>{{ voice_channel_session.messages ? voice_channel_session.messages|json_encode : '' }}</td>
+                <td>{{ voice_channel_session.createdAt ? voice_channel_session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ voice_channel_session.updatedAt ? voice_channel_session.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_voice_channel_session_show', {'id': voice_channel_session.id}) }}">show</a>
+                    <a href="{{ path('app_voice_channel_session_edit', {'id': voice_channel_session.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_voice_channel_session_new') }}">Create new</a>
+{% endblock %}

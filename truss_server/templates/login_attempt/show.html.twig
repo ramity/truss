@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LoginAttempt{% endblock %}
+
+{% block body %}
+    <h1>LoginAttempt</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ login_attempt.id }}</td>
+            </tr>
+            <tr>
+                <th>Result</th>
+                <td>{{ login_attempt.result ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ login_attempt.createdAt ? login_attempt.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_login_attempt_index') }}">back to list</a>
+
+    <a href="{{ path('app_login_attempt_edit', {'id': login_attempt.id}) }}">edit</a>
+
+    {{ include('login_attempt/_delete_form.html.twig') }}
+{% endblock %}

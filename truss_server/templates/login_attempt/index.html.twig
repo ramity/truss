@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LoginAttempt index{% endblock %}
+
+{% block body %}
+    <h1>LoginAttempt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Result</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for login_attempt in login_attempts %}
+            <tr>
+                <td>{{ login_attempt.id }}</td>
+                <td>{{ login_attempt.result ? 'Yes' : 'No' }}</td>
+                <td>{{ login_attempt.createdAt ? login_attempt.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_login_attempt_show', {'id': login_attempt.id}) }}">show</a>
+                    <a href="{{ path('app_login_attempt_edit', {'id': login_attempt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_login_attempt_new') }}">Create new</a>
+{% endblock %}

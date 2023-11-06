@@ -40,6 +40,26 @@ class Post
         $this->updatedAt = new DateTimeImmutable();
     }
 
+    public function __toString()
+    {
+        if (count($this->textChannels) == 0)
+        {
+            return "{$this->author->getUsername()} {$this->createdAt->format('r')}";
+        }
+        else if (count($this->textChannels) == 1)
+        {
+            return "{$this->author->getUsername()} {$this->textChannels[0]->getName()} {$this->createdAt->format('r')}";
+        }
+        else
+        {
+            $output = "{$this->author->getUsername()} [ ";
+            foreach($this->textChannels as $textChannel) { $output .= $textChannel->getName() . " "; }
+            $output .= "] {$this->createdAt->format('r')}";
+
+            return $output;
+        }
+    }
+
     public function getId(): ?int
     {
         return $this->id;

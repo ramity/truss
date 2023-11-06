@@ -31,6 +31,11 @@ class LoginAttempt
         $this->createdAt = new DateTimeImmutable();
     }
 
+    public function __toString()
+    {
+        return "{$this->account->id} @ {$this->createdAt->format('r')}";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

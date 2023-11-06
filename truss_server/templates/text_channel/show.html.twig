@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TextChannel{% endblock %}
+
+{% block body %}
+    <h1>TextChannel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ text_channel.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ text_channel.name }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ text_channel.createdAt ? text_channel.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ text_channel.updatedAt ? text_channel.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_text_channel_index') }}">back to list</a>
+
+    <a href="{{ path('app_text_channel_edit', {'id': text_channel.id}) }}">edit</a>
+
+    {{ include('text_channel/_delete_form.html.twig') }}
+{% endblock %}
